@@ -8,7 +8,9 @@ type Props = {
 	children: ReactNode
 }
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+	defaultOptions: { queries: { retry: 5, retryDelay: 1000 } }
+})
 
 const TanstackProvider = ({ children }: Props) => {
 	return (
