@@ -1,9 +1,9 @@
-import Todo from '@/components/todo'
+import Todos from '@/components/todos'
 
 export default function Home() {
 	return (
 		<main>
-			<Todo />
+			<Todos />
 		</main>
 	)
 }
