@@ -25,7 +25,7 @@ const Todo = (props: Props) => {
 			<div>
 				{data.map((todoId: number) => (
 					<p key={todoId} className='text-white'>
-						{todoId}
+						id: {todoId}
 					</p>
 				))}
 			</div>
