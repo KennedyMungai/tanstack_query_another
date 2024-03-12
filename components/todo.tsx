@@ -19,12 +19,6 @@ const Todo = (props: Props) => {
 
 	return (
 		<div>
-			{todoIdData.map((todoId: number) => (
-				<p key={todoId} className='text-white'>
-					id: {todoId}
-				</p>
-			))}
-
 			<ul className='mt-20'>
 				{todosQueries.map(({ data }, index) => (
 					<li key={data?.id}>
