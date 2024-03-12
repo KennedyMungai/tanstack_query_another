@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 const useTodosIds = () => {
 	return useQuery({
 		queryKey: ['todos'],
-		queryFn: getTodoIds
+		queryFn: getTodoIds,
+		refetchOnWindowFocus: false
 	})
 }
