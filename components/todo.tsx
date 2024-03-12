@@ -1,10 +1,13 @@
 'use client'
 
 import { useTodosIds } from '@/services/todos'
+import { useIsFetching } from '@tanstack/react-query'
 
 type Props = {}
 
 const Todo = (props: Props) => {
+	const isFetching = useIsFetching()
+
 	const { error, data, isPending, isError, fetchStatus, status } =
 		useTodosIds()
 
