@@ -17,7 +17,7 @@ const Todos = (props: Props) => {
 
 	const createTodoMutation = useCreateTodo()
 
-	const {} = useForm<Todo>()
+	const { register, handleSubmit } = useForm<Todo>()
 
 	const handleCreateTodoSubmit: SubmitHandler<Todo> = (data: Todo) =>
 		createTodoMutation.mutate(data)
@@ -28,11 +28,19 @@ const Todos = (props: Props) => {
 
 	return (
 		<div>
-			<form
-				action=''
-				onSubmit={handleCreateTodoSubmit}
-				className=''
-			></form>
+			<form action='' onSubmit={handleSubmit(handleCreateTodoSubmit)}>
+				<h4>New Todo</h4>
+				<input type='text' placeholder='Title' {...register('title')} />
+				<br />
+				<input
+					type='text'
+					placeholder='Description'
+					{...register('description')}
+				/>
+				<br />
+				<button type='submit'>Submit Query</button>
+				<br />
+			</form>
 			<ul>
 				{todosQueries.map(({ data }, index) => (
 					<li key={data?.id}>
