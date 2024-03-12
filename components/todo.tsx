@@ -6,7 +6,7 @@ import { useIsFetching } from '@tanstack/react-query'
 type Props = {}
 
 const Todo = (props: Props) => {
-	const isFetching = useIsFetching()
+	// const isFetching = useIsFetching()
 
 	const { error, data, isPending, isError, fetchStatus, status } =
 		useTodosIds()
@@ -15,13 +15,11 @@ const Todo = (props: Props) => {
 
 	if (isError) return <span>There is an error</span>
 
-	console.log(data)
-
 	return (
 		<>
-			<p>Query Function Status: {fetchStatus}</p>
-			<p>Query Data Status: {status}</p>
-			<p>Global isFetching: {isFetching}</p>
+			{/* <p>Query Function Status: {fetchStatus}</p> */}
+			{/* <p>Query Data Status: {status}</p> */}
+			{/* <p>Global isFetching: {isFetching}</p> */}
 			<div>
 				{data.map((todoId: number) => (
 					<p key={todoId} className='text-white'>
