@@ -9,3 +9,6 @@ export const getTodo = async (id: number) =>
 	await axios
 		.get(`http://localhost:3001/todos?id=${id}`)
 		.then((res) => res.data)
+
+export const createTodo = async (data: Todo) =>
+	await axios.post('http://localhost:3001/todos', data)
