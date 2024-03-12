@@ -1,24 +1,41 @@
 'use client'
 
-import { useTodosIds } from '@/services/todos'
+import { useTodos, useTodosIds } from '@/services/todos'
 
 type Props = {}
 
 const Todo = (props: Props) => {
-	const { error, data, isPending, isError, fetchStatus, status } =
-		useTodosIds()
+	const {
+		data: todoIdData,
+		isPending: isTodoIdPending,
+		isError: isTodoIdError
+	} = useTodosIds()
 
-	if (isPending) return <span>...loading</span>
+	const todosQueries = useTodos(todoIdData)
 
-	if (isError) return <span>There is an error</span>
+	if (isTodoIdPending) return <span>...loading</span>
+
+	if (isTodoIdError) return <span>There is an error</span>
 
 	return (
 		<div>
-			{data.map((todoId: number) => (
+			{todoIdData.map((todoId: number) => (
 				<p key={todoId} className='text-white'>
 					id: {todoId}
 				</p>
 			))}
+
+			<ul className='mt-20'>
+				{todosQueries.map(({ data }, index) => (
+					<li key={data?.id}>
+						<div className=''>Id: {data?.id}</div>
+						<span>
+							<strong>Title: {data?.title}</strong>
+							<strong>Description: {data?.description}</strong>
+						</span>
+					</li>
+				))}
+			</ul>
 		</div>
 	)
 }
