@@ -19,7 +19,7 @@ const Todo = (props: Props) => {
 
 	return (
 		<div>
-			<ul className='mt-20'>
+			<ul>
 				{todosQueries.map(({ data }, index) => (
 					<li key={data?.id}>
 						<div className=''>Id: {data?.id}</div>
