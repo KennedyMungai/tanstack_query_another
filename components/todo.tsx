@@ -21,6 +21,7 @@ const Todo = (props: Props) => {
 		<>
 			<p>Query Function Status: {fetchStatus}</p>
 			<p>Query Data Status: {status}</p>
+			<p>Global isFetching: {isFetching}</p>
 			<div>
 				{data.map((todoId: number) => (
 					<p key={todoId} className='text-white'>
