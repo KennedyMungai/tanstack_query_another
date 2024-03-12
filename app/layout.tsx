@@ -17,9 +17,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<TanstackProvider>
-				<body className={inter.className}>{children}</body>
-			</TanstackProvider>
+			<body className={inter.className}>
+				<TanstackProvider>{children}</TanstackProvider>
+			</body>
 		</html>
 	)
 }
