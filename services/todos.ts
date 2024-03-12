@@ -1,10 +1,9 @@
 import { getTodoIds } from '@/lib/todos'
 import { useQuery } from '@tanstack/react-query'
 
-const useTodosIds = () => {
+export const useTodosIds = () => {
 	return useQuery({
 		queryKey: ['todos'],
-		queryFn: getTodoIds,
-		refetchOnWindowFocus: false
+		queryFn: getTodoIds
 	})
 }
