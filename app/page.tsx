@@ -1,11 +1,11 @@
-import Projects from '@/components/projects'
-import Todos from '@/components/todos'
+import Products from '@/components/Products'
 
 export default function Home() {
 	return (
 		<main>
-			<Projects />
+			{/* <Projects /> */}
 			{/* <Todos /> */}
+			<Products />
 		</main>
 	)
 }

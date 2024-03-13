@@ -1,0 +1,9 @@
+'use client'
+
+type Props = {}
+
+const Products = (props: Props) => {
+	return <div>Products</div>
+}
+
+export default Products
