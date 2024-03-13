@@ -35,11 +35,14 @@ const Todos = (props: Props) => {
 				<input
 					type='text'
 					placeholder='Description'
-					disabled={createTodoMutation.isPending}
 					{...register('description')}
 				/>
 				<br />
-				<button type='submit'>Submit Query</button>
+				<button type='submit' disabled={createTodoMutation.isPending}>
+					{createTodoMutation.isPending
+						? 'Submitting...'
+						: 'Submit Query'}
+				</button>
 				<br />
 			</form>
 			<ul>
