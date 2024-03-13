@@ -27,7 +27,7 @@ export const useUpdateTodo = (todo: Todo) => {
 			} else {
 				await queryClient.invalidateQueries({ queryKey: ['todos'] })
 				await queryClient.invalidateQueries({
-					queryKey: ['todo', todo.id]
+					queryKey: ['todo', { id: variables.id }]
 				})
 			}
 		}
