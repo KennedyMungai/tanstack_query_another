@@ -18,3 +18,8 @@ export const updateTodo = async (data: Todo) =>
 
 export const deleteTodo = async (id: number) =>
 	await axios.delete(`http://localhost:3001/todos/${id}`)
+
+export const getProjects = async ({ pageParam }: { pageParam: number }) =>
+	await axios
+		.get(`http://localhost:3001/projects?page=${pageParam}`)
+		.then((res) => res.data as Project[])

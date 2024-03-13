@@ -5,7 +5,7 @@ export default function Home() {
 	return (
 		<main>
 			<Projects />
-			<Todos />
+			{/* <Todos /> */}
 		</main>
 	)
 }
