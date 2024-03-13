@@ -21,5 +21,5 @@ export const deleteTodo = async (id: number) =>
 
 export const getProjects = async (page: number = 1) =>
 	await axios
-		.get(`http://localhost:3001/projects?page=${page}`)
+		.get(`http://localhost:3001/projects?page=${page}&limit=3`)
 		.then((res) => res.data as Project[])
