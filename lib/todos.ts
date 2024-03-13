@@ -28,3 +28,8 @@ export const getProducts = async ({ pageParam }: { pageParam: number }) =>
 	await axios
 		.get(`http://localhost:3001/products?page=${pageParam + 1}&limit=3`)
 		.then((res) => res.data as Product[])
+
+export const getProduct = async (id: number) =>
+	await axios
+		.get(`http://localhost:3001/products/${id}`)
+		.then((res) => res.data as Product)

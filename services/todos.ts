@@ -1,9 +1,16 @@
-import { getProducts, getProjects, getTodo, getTodosIds } from '@/lib/todos'
+import {
+	getProduct,
+	getProducts,
+	getProjects,
+	getTodo,
+	getTodosIds
+} from '@/lib/todos'
 import {
 	keepPreviousData,
 	useInfiniteQuery,
 	useQueries,
-	useQuery
+	useQuery,
+	useQueryClient
 } from '@tanstack/react-query'
 
 export const useTodosIds = () => {
@@ -50,3 +57,24 @@ export const useProducts = () =>
 			return firstPageParam - 1
 		}
 	})
+
+export const useProduct = (id: number | null) => {
+	const queryClient = useQueryClient()
+
+	return useQuery({
+		queryKey: ['product', { id }],
+		queryFn: () => getProduct(id!),
+		enabled: !!id,
+		placeholderData: () => {
+			const cachedProducts = (
+				queryClient.getQueryData(['products']) as {
+					pages: Product[] | undefined
+				}
+			)?.pages?.flat(2)
+
+			if (cachedProducts) {
+				return cachedProducts.find((item) => item.id === id)
+			}
+		}
+	})
+}
