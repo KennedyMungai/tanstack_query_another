@@ -1,5 +1,5 @@
-import { getTodo, getTodosIds } from '@/lib/todos'
-import { useQueries, useQuery } from '@tanstack/react-query'
+import { getProjects, getTodo, getTodosIds } from '@/lib/todos'
+import { keepPreviousData, useQueries, useQuery } from '@tanstack/react-query'
 
 export const useTodosIds = () => {
 	return useQuery({
@@ -17,3 +17,11 @@ export const useTodos = (ids: (number | undefined)[] | undefined) =>
 			}
 		})
 	})
+
+export const useProjects = (page: number) => {
+	return useQuery({
+		queryKey: ['projects', { page }],
+		queryFn: () => getProjects(page),
+		placeholderData: keepPreviousData
+	})
+}
