@@ -1,5 +1,10 @@
-import { getProjects, getTodo, getTodosIds } from '@/lib/todos'
-import { keepPreviousData, useQueries, useQuery } from '@tanstack/react-query'
+import { getProducts, getProjects, getTodo, getTodosIds } from '@/lib/todos'
+import {
+	keepPreviousData,
+	useInfiniteQuery,
+	useQueries,
+	useQuery
+} from '@tanstack/react-query'
 
 export const useTodosIds = () => {
 	return useQuery({
@@ -18,10 +23,30 @@ export const useTodos = (ids: (number | undefined)[] | undefined) =>
 		})
 	})
 
-export const useProjects = (page: number) => {
-	return useQuery({
+export const useProjects = (page: number) =>
+	useQuery({
 		queryKey: ['projects', { page }],
 		queryFn: () => getProjects(page),
 		placeholderData: keepPreviousData
 	})
-}
+
+export const useProducts = () =>
+	useInfiniteQuery({
+		queryKey: ['products'],
+		queryFn: getProducts,
+		initialPageParam: 0,
+		getNextPageParam: (lastPage, allPages, lastPageParam) => {
+			if (lastPage.length === 0) {
+				return undefined
+			}
+
+			return lastPageParam + 1
+		},
+		getPreviousPageParam: (firstPage, allPages, firstPageParam) => {
+			if (firstPage.length <= 0) {
+				return undefined
+			}
+
+			return firstPageParam - 1
+		}
+	})
