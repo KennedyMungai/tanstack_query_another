@@ -12,3 +12,6 @@ export const getTodo = async (id: number) =>
 
 export const createTodo = async (data: Todo) =>
 	await axios.post('http://localhost:3001/todos', data)
+
+export const updateTodo = async (data: Todo) =>
+	await axios.put(`http://localhost:3001/todos/${data.id}`, data)

@@ -1,4 +1,4 @@
-import { createTodo } from '@/lib/todos'
+import { createTodo, updateTodo } from '@/lib/todos'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 export const useCreateTodo = () => {
@@ -12,5 +12,24 @@ export const useCreateTodo = () => {
 		onSuccess: async (data, variables, context) =>
 			await queryClient.invalidateQueries({ queryKey: ['todos'] }),
 		onSettled: (data, error, variables, context) => console.log('Settled')
+	})
+}
+
+export const useUpdateTodo = (todo: Todo) => {
+	const queryClient = useQueryClient()
+
+	return useMutation({
+		mutationKey: ['updateTodo', todo.id],
+		mutationFn: (data: Todo) => updateTodo(data),
+		onSettled: async (_, error, variables) => {
+			if (error) {
+				console.log(error.message)
+			} else {
+				await queryClient.invalidateQueries({ queryKey: ['todos'] })
+				await queryClient.invalidateQueries({
+					queryKey: ['todo', todo.id]
+				})
+			}
+		}
 	})
 }
