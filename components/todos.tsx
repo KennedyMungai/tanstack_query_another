@@ -1,6 +1,10 @@
 'use client'
 
-import { useCreateTodo, useUpdateTodo } from '@/services/mutations'
+import {
+	useCreateTodo,
+	useDeleteTodo,
+	useUpdateTodo
+} from '@/services/mutations'
 import { useTodos, useTodosIds } from '@/services/todos'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
@@ -19,6 +23,8 @@ const Todos = (props: Props) => {
 
 	const updateTodoMutation = useUpdateTodo()
 
+	const deleteTodoMutation = useDeleteTodo()
+
 	const { register, handleSubmit } = useForm<Todo>()
 
 	const handleCreateTodoSubmit: SubmitHandler<Todo> = (data: Todo) =>
@@ -29,6 +35,8 @@ const Todos = (props: Props) => {
 			updateTodoMutation.mutate({ ...data, checked: true })
 		}
 	}
+
+	const handleDeleteTodo = (id: number) => deleteTodoMutation.mutate(id)
 
 	if (isTodoIdPending) return <span>...loading</span>
 
@@ -67,6 +75,11 @@ const Todos = (props: Props) => {
 							>
 								{data.checked ? 'Done' : 'Mark as done'}
 							</button>
+							{data && data.id && (
+								<button onClick={handleDeleteTodo(data?.id)}>
+									Delete
+								</button>
+							)}
 						</div>
 					</li>
 				))}
