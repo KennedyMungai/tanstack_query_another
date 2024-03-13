@@ -36,7 +36,10 @@ const Todos = (props: Props) => {
 		}
 	}
 
-	const handleDeleteTodo = (id: number) => deleteTodoMutation.mutate(id)
+	const handleDeleteTodo = async (id: number) => {
+		await deleteTodoMutation.mutateAsync(id)
+		console.log('Success')
+	}
 
 	if (isTodoIdPending) return <span>...loading</span>
 
@@ -76,7 +79,7 @@ const Todos = (props: Props) => {
 								{data.checked ? 'Done' : 'Mark as done'}
 							</button>
 							{data && data.id && (
-								<button onClick={handleDeleteTodo(data?.id)}>
+								<button onClick={handleDeleteTodo(data?.id!)}>
 									Delete
 								</button>
 							)}
