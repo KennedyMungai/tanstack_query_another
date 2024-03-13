@@ -15,11 +15,11 @@ export const useCreateTodo = () => {
 	})
 }
 
-export const useUpdateTodo = (todo: Todo) => {
+export const useUpdateTodo = () => {
 	const queryClient = useQueryClient()
 
 	return useMutation({
-		mutationKey: ['updateTodo', todo.id],
+		mutationKey: ['updateTodo'],
 		mutationFn: (data: Todo) => updateTodo(data),
 		onSettled: async (_, error, variables) => {
 			if (error) {
